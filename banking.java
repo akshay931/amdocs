@@ -26,18 +26,23 @@ class banking {
                 preparedStmt.setString(3, name);
                 preparedStmt.execute();
                 con.close();
-                System.out.println("your account has been opened and generated account number is " + (int) number);
+                System.out
+                        .println(
+                                "Welcome " + name + " \n\nyour account has been opened and generated account number is "
+                                        + (int) number);
 
             }
             if (a == 2) {
                 System.out.println("enter your account number to check available balance: ");
                 double number = sc.nextDouble();
-                String query = "select balance from banking where ac_number = ?";
+                String query = "select * from banking where ac_number = ?";
                 PreparedStatement preparedStmt = con.prepareStatement(query);
                 preparedStmt.setDouble(1, number);
                 ResultSet rs = preparedStmt.executeQuery();
                 if (rs.next()) {
-                    System.out.println("available balance is " + rs.getInt("balance"));
+                    System.out
+                            .println(
+                                    "Hello " + rs.getString("name") + "\navailable balance is " + rs.getInt("balance"));
                 } else {
                     System.out.println("Invalid Account number");
                 }
@@ -57,14 +62,15 @@ class banking {
                 int rs1 = preparedStmt.executeUpdate();
 
                 // -------------------------------------------
-                query = "select balance from banking where ac_number = ?";
+                query = "select * from banking where ac_number = ?";
                 preparedStmt = con.prepareStatement(query);
                 preparedStmt.setDouble(1, number);
                 ResultSet rs = preparedStmt.executeQuery();
                 int total = 0;
                 if (rs.next()) {
                     total = rs.getInt("balance");
-                    System.out.println("total available balance after deposit is " + total);
+                    System.out.println(
+                            "Hello " + rs.getString("name") + "\n total available balance after deposit is " + total);
 
                 } else {
                     System.out.println("Invalid Account number");
@@ -86,14 +92,16 @@ class banking {
                 int rs1 = preparedStmt.executeUpdate();
 
                 // -------------------------------------------
-                query = "select balance from banking where ac_number = ?";
+                query = "select * from banking where ac_number = ?";
                 preparedStmt = con.prepareStatement(query);
                 preparedStmt.setDouble(1, number);
                 ResultSet rs = preparedStmt.executeQuery();
                 int total = 0;
                 if (rs.next()) {
                     total = rs.getInt("balance");
-                    System.out.println("total available balance after withdrawal is " + total);
+                    System.out.println(
+                            "Hello " + rs.getString("name") + " \ntotal available balance after withdrawal is "
+                                    + total);
                 } else {
                     System.out.println("Invalid Account number");
                 }
